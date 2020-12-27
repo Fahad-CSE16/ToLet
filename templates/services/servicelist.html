@@ -1,0 +1,95 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} View Post{% endblock %}
+{% block homeactive %} active{% endblock homeactive %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+{% load static %}
+  <h1 style="text-align:center;color:white;">Services</h1>
+<div class="container text-left">
+  {% for post in services %}
+
+  <div class="row   mb-4 mx-1  ">
+   
+    <div class="col-md-6 border rounded col-lg-6 offset-md-3 offset-lg-3 p-4">
+
+      <div>
+
+        <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+
+        
+      </div>
+
+      <div>
+        Vehicle_type: <b> <i> {{post.vehicle_type}} Flat </i></b> <br> From <i><b>{{post.location}} </b></i>
+<br>
+  to <i><b>{{post.destination}} </b></i>
+        <br>
+        <b>Comapany:</b>{{post.company_name}} <br>
+        <b>Phone:</b>{{post.phone}} <br>
+        
+        <br>
+      </div>
+    </div>
+
+  </div>
+
+  {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+{% block css %}
+.col-md-7{
+color:white;
+}
+.sidebar {
+margin: 0;
+width: 180px;
+background-color: #f1f1f1;
+height: 95%;
+overflow: auto;
+overflow-y: scroll;
+display: block;
+color: black;
+padding: 16px;
+text-decoration: none;
+}
+
+/* The sidebar menu */
+.sidenav {
+height: 90%; /* Full-height: remove this if you want "auto" height */
+width: 190px; /* Set the width of the sidebar */
+position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+z-index: 1; /* Stay on top */
+top:10; /* Stay at the top */
+left: 0;
+
+display: block;
+overflow: auto;
+margin: 0;
+background:none;
+padding-top: 200px;
+}
+
+
+/* The navigation menu links */
+.sidenav a {
+padding: 6px 8px 6px 16px;
+text-decoration: none;
+font-size: 25px;
+color: white;
+text-shadow: 1px 2px blue;
+display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+{% endblock %}

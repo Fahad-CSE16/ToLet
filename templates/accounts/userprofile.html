@@ -1,0 +1,108 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} Your Profile{% endblock %}
+
+{% block userprofile %} active{% endblock userprofile %}
+{% block body %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+<div class="container-fluid">
+    <div class="col-md-8 offset-md-2">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background:none; color:white;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+                aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style=" color:white;">Edit</span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item "><a class="nav-link" href="/acc/changepass/">ChangePass</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/acc/updateprofile/">UpdateProfile</a></li>
+                    
+                                      
+                </ul>
+            </div>
+        </nav>
+        <br><br>
+    </div>
+    <div class="col-md-12 ">
+        <div class="row">
+            <div class="col">
+
+
+                <img class="rounded-circle account-img my-2 mx-3 mr-3" src="{{user.userprofile.image.url}}" alt="...">
+            </div>
+
+
+            <div class="col">
+                <h5 class="mt-0">UserName:{{user.username}}</h5>
+                Name: {{user.first_name}} {{user.last_name}}
+                <br>
+                Email:{{user.email}}
+                <br>
+                Gender: {{user.userprofile.gender}}<br>
+                Address: {{user.userprofile.address}}<br>
+                Phone: {{user.userprofile.phone}}<br>
+                Profession: {{user.userprofile.profession}}<br>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% comment %} {% for item in mytolet %}
+<div class="col-md-8 offset-md-2 ">
+    <div
+        class="row bg-succes no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col  p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">
+                <a href="/profile/otherprofile/{{item.user.username}}">
+                    <h4>{{item.user.first_name}} {{item.user.last_name}}</h4>
+            </strong></a>
+            <div class="preview">
+                is giving To-let of a <b> <i> {{item.category}} </i></b> in <i><b>{{item.district}} </b></i>
+
+                <br>
+                <b>Rent:</b>{{item.rent}}
+                <p class="card-text mb-auto"> <a href="/tolet/toletpost/{{item.id}}"
+                        class="stretched-link">...Details</a></p>
+                <br>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %} {% endcomment %}
+
+
+{% endif %}
+{% endblock %}
+{% block css %}
+div.media-body {
+height: auto;
+width:100%;
+color:white;
+background: none;}
+
+nav .navbar {
+float:left;
+}
+nav .nav-link{
+float:left;
+}
+
+.col-md-12{
+color:white;
+}
+
+
+
+
+
+{% endblock %}

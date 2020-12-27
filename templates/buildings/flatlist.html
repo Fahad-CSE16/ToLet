@@ -1,0 +1,190 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} View Post{% endblock %}
+{% block homeactive %} active{% endblock homeactive %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+<div class="col-md-7 offset-md-3">
+  <h1 style="text-align:center;">TO-LETs</h1>
+
+  <form action="{% url 'search' %}" method="post">
+    {% csrf_token %}
+
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect01" name="district" required>
+        <option></option>
+        {% for i in district %}
+        <option value="{{i.id}}">{{i}}</option>
+        {% endfor %}
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect01">District</label>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect03" name="type">
+
+        <option value="Family">Family</option>
+        <option value="Bachelor">Bachelor</option>
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect03">Type</label>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect03" name="gas">
+
+        <option value=1>Required</option>
+        <option value=0>Not Mendatory</option>
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect03">Gas</label>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect03" name="parking">
+
+        <option value=1>Required</option>
+        <option value=0>Not Mendatory</option>
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect03">Parking</label>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect03" name="lift">
+        <option value=1>Required</option>
+        <option value=0>Not Mendatory</option>
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect03">Lift</label>
+      </div>
+    </div>
+    
+    
+    
+    <div class="mb-3">
+      <div class="row">
+        <div class="col">
+          <input type="number" class="form-control"  placeholder="Minimum Rent" name="price_from" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control"  placeholder="Maximum Rent" name="price_to" required>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="row">
+        <div class="col"><input type="number" class="form-control" name="size_from"  placeholder="Minimum Size(sqft)" required>
+        </div>
+        <div class="col"><input type="number" class="form-control" name="size_to"  placeholder="Maximum Size(sqft)" required>
+        </div>
+      </div>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Keyword(if any)" name="keyword" >
+      </div>
+    <button class="btn btn-outline-info " type="submit" value="submit">Filter Posts </button>
+
+  </form>
+</div>
+
+
+
+
+
+<div class="container">
+
+
+  {% for post in flats %}
+
+  <div class="row  border rounded  mb-4 mx-1  ">
+    <div class="col">
+      <img class="d-block m-auto img-thumbnail" src='/media/{{post.photo}}'>
+    </div>
+    <div class="col-md-8 col-lg-8 p-4">
+
+      <div>
+
+        <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+
+        <span class="badge badge-secondary">
+          {{post.timestamp|naturaltime}}</span>
+      </div>
+
+      <div>
+        is giving To-let of a <b> <i> {{post.rent_type}} Flat </i></b> in <i><b>{{post.district}} </b></i>
+
+        <br>
+        <b>Rent:</b>{{post.rent}}
+        <p class="card-text mb-auto"> <a href="/flat/{{post.pk}}/" class="stretched-link">...Details</a></p>
+        <br>
+      </div>
+    </div>
+
+  </div>
+
+  {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+{% block css %}
+.col-md-7{
+color:white;
+}
+.sidebar {
+margin: 0;
+width: 180px;
+background-color: #f1f1f1;
+height: 95%;
+overflow: auto;
+overflow-y: scroll;
+display: block;
+color: black;
+padding: 16px;
+text-decoration: none;
+}
+
+/* The sidebar menu */
+.sidenav {
+height: 90%; /* Full-height: remove this if you want "auto" height */
+width: 190px; /* Set the width of the sidebar */
+position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+z-index: 1; /* Stay on top */
+top:10; /* Stay at the top */
+left: 0;
+
+display: block;
+overflow: auto;
+margin: 0;
+background:none;
+padding-top: 200px;
+}
+
+
+/* The navigation menu links */
+.sidenav a {
+padding: 6px 8px 6px 16px;
+text-decoration: none;
+font-size: 25px;
+color: white;
+text-shadow: 1px 2px blue;
+display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+{% endblock %}

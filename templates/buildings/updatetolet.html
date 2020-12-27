@@ -1,0 +1,23 @@
+{% extends 'basic.html' %}
+
+{% block title%} Update Post{% endblock %}
+ {% block homeactive %} active{% endblock homeactive %}
+{% block body %}
+    {% load crispy_forms_tags %}
+
+<div class="col-md-6 offset-md-3">
+    
+        <form action="/tolet/edittolet/{{instance.id}}/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group mx-auto">
+                <legend class="border-bottom text-center mb-4"><h2>Update your tolet post</h2></legend>
+                {{ form|crispy }}
+                
+            </fieldset>
+            <button class="btn btn-outline-info " type="submit" value="submit">Save it </button>
+            {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        </form>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,173 @@
+{% extends 'basic.html' %}
+{% block title %}Homepage
+{% endblock  %}
+{% block body %}
+
+<div class="container-fluid " style="height:300px;">
+ {% comment %} <marquee behavior="slide" direction="left" scrollamount="15" style=" overflow:hidden; position:relative;"><h3>Welcome to Desirebd</h3></marquee>
+ <marquee behavior="slide" direction="left" scrollamount="10"><h3>Welcome to Desirebd</h3></marquee> {% endcomment %}
+ {% comment %} <div class="marquee">
+        <h1> Welcome to DESIREBD</h1> 
+    </div> {% endcomment %}
+     {% comment %} <div class="neons col-12">
+         <h1><em>DesireBD</em></h1>
+      </div> {% endcomment %}
+</div>
+<div class="container-fluid" style="height: 190px">
+
+<div class="row "  style="height: 190px;  color:#26f1fb;">
+    <div class="col-sm-4" style="background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/static/images/tuition.jpg');
+      background-size:   auto 190px;
+      {% comment %} background-repeat:no-repeat; {% endcomment %}
+      background-attachment: fixed;
+      background-position: top;">
+    <a href="/posts/viewpost/">
+      <p style="  color:#26f1fb;">TuitionProfile</p>
+      <img src="/static/images/student.png" style=" display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width:auto;
+  max-height:130px;
+" alt="">
+      </a>
+      </div>
+    <div class="col-sm-4" style="background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/static/images/metrimony.jpg');
+      background-size: auto 190px;
+      background-attachment: fixed;
+      background-position: top;" >
+    <a href="/metrimony/partners/">
+      <p  style="  color:#26f1fb;">Metrimony</p>
+      <img src="/static/images/couple2.png" style=" display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width:auto;
+  max-height:130px;
+" alt="">
+      </a>
+      </div>
+    <div class="col-sm-4" style="background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/static/images/property2.jpg');
+      background-size: auto 190px;
+      background-attachment: fixed;
+      background-position: top;
+      
+     " >
+    <a href="/tolet/viewtolet/">
+      <p  style="  color:#26f1fb;">TO-Let</p>
+      <img src="/static/images/property.png" style=" display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width:auto;
+  max-height:130px;
+" alt="">
+      </a>
+      </div>
+</div>
+</div>
+<div class="container-fluid" style=" height:160px; text-size:50px; text-align: center; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),white; color:black; ">
+<h1 style="text-align:center;">Welcome To Desirebd</h1>
+
+
+We are here to meet you with your Desire.  <br>
+You have to just create a profile and just need to add approriate data 
+to your profile. <br>
+Our Program will automatically does its task and you will meet with your desire. Stay with us, be happy!
+
+
+</div>
+{% endblock  %}
+{% block css %}
+p{
+    
+    color:black; 
+    
+    {% comment %} text-shadow:1px 1px blue; {% endcomment %}
+    text-align:center;
+    vertical-align:bottom;
+    
+}
+ .marquee {
+            height: 150px;
+            overflow: hidden;
+            {% comment %} position: relative; {% endcomment %}
+            background: none;
+            color:white;
+            text-shadow:1px 1px blue;
+        }
+        
+        .marquee h1 {
+            position: absolute;
+            width: 100%;
+            color:white;
+            {% comment %} height: 100%; {% endcomment %}
+            margin: 0;
+            line-height: 150px;
+            text-align: center;
+            -moz-transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            -moz-animation: scroll-left 2s linear infinite;
+            -webkit-animation: scroll-left 2s linear infinite;
+            animation: scroll-left 13s linear infinite;
+            
+        }
+        
+        @-moz-keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(100%);
+            }
+            100% {
+                -moz-transform: translateX(-100%);
+            }
+        }
+        
+        @-webkit-keyframes scroll-left {
+            0% {
+                -webkit-transform: translateX(100%);
+            }
+            100% {
+                -webkit-transform: translateX(-100%);
+            }
+        }
+        
+        @keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(100%);
+                -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+            }
+            100% {
+                -moz-transform: translateX(-100%);
+                -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+            }
+        }
+@import url('https://fonts.googleapis.com/css?family=Codystar:300&display=swap');
+
+
+
+.neons {
+   margin-top: 10rem;
+   text-align: center;
+}
+
+.neons h1 {
+  font-size: 9rem;
+  text-align: center;
+   font-weight: bold;
+  -webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+     from {
+      color: #fff;
+    text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2, 0 0 30px #00fff2, 0 0 40px #00fff2, 0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2, 0 0 90px #00fff2;
+  }
+  
+  to {
+     color: gray;
+    text-shadow: 0 0 20px #00fff2, 0 0 30px #00fff2, 0 0 40px #00fff2, 0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2, 0 0 80px #00fff2, 0 1 90px #00fff2;
+  }
+}
+{% endblock %}

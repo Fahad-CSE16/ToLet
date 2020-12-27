@@ -1,0 +1,32 @@
+{% extends 'basic.html' %}
+
+{% block title%} Upload Images{% endblock %}
+{% block contactactive %} active{% endblock contactactive %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+{% if user.is_authenticated %}
+<div class="col-md-6 offset-md-3">
+    
+        <form action="/tolet/imgup/{{id}}/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group mx-auto">
+                <legend class="border-bottom text-center mb-4"><h2>Creat a Post For To-let</h2></legend>
+                {{ form|crispy }}
+            
+                {{ file_form|crispy }}
+            
+                <p></p>
+            </fieldset>
+            <button class="btn btn-outline-info " type="submit" id="add" value="submit">Submit</button>
+            {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        </form>
+
+</div>
+{% endif %}
+{% endblock %}
+{% block js %}
+<script>
+
+</script>
+{% endblock js %}

@@ -1,0 +1,169 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} View Post {% endblock %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+<button class="btn btn-primary" style="width:auto;"><a href="/tolet/viewtolet/">Go Back <--</a></button>
+<img src='/media/{{post.photo}}' class="mb-5 d-block m-auto img-thumbnail" alt="..." width="auto" height="300px">
+
+{% for i in post.images.all %}
+<img src='/media/{{i.photo}}' class="mb-3 img-thumbnail" alt="..." width="auto" height="300px">
+{% if user == post.user %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <a>Delete THIS photo</a>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are You sure To delete this photo?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><a href="">Close</a></button>
+                <button type="button" class="btn btn-primary"><a href="/flat/deletephoto/{{i.id}}/">Delete</a></button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endif %}
+
+{% endfor %}
+
+
+<div class="container-fluid">
+
+
+
+<div class="col-md-8 offset-md-2">
+    <div class="blog-post">
+        <div>
+            <a href="/profile/otherprofile/{{post.author.username}}">
+                <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+            </a>
+            <span class="badge badge-secondary">
+                {{post.timestamp|naturaltime}}</span>
+        </div>
+        <br> -Giving a to-let for {{post.rent_type}}
+        
+        at  <b>{{post.district}}</b>  <br>
+
+        The Loacation is : <b><i> {{post.address}}</i></b> <br>
+        Rent: <b><i> {{post.rent}}</i></b> <br>
+       <p> Details: <i> {{post.details}}</i></p> <br>
+        <p>Total_stairs: <i> {{post.total_stairs}}</i></p> <br>
+        <p>Floor in : <i> {{post.floor}}th Floor</i></p> <br>
+        It Has {% if post.lift %}Lift Facility, {% endif %} 
+        {% if post.gas %}Gas Facility, {% endif %}
+        {% if post.parking %}Parking Facility {% endif %}
+        <p>Size: <i> {{post.size}}sqft</i></p> <br>
+        {% if user == post.user %}
+        <div>
+            <a href="/flat/update/{{post.id}}/">Edit To-Let</a>
+            <br>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                <a > Add Photo</a>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Photo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Add Photos of Your Property To Your Post
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/flat/addphoto/{{post.id}}/" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Photo</label>
+                                    <input class="form-control" type="file" id="formFile" name="photo">
+                                </div>
+                                <button class="btn btn-outline-info " type="submit" id="add" value="submit">Submit
+                                </button>
+                                {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="btnOne"><a href="#" onClick="javascript:addBtn();">Delete</a> </div>
+        </div>
+        <div id="btnHolder"></div>
+        {% endif %}
+        <br>
+        
+       
+    </div><!-- /.blog-post -->
+</div><!-- /.blog-main -->
+</div>
+
+
+
+{% endblock %}
+{% block js %}
+
+<script>
+
+    function addBtn() {
+        document.getElementById('btnHolder').innerHTML = ' Are you Sure to delete? <a href="/flat/delete/{{post.id}}/" class="stretched-link">Yes,Sure</a>';
+    }
+
+</script>
+{% endblock js %}
+{% block css %}
+.btn{
+width:auto;
+}
+#image{
+visibility:hidden;
+}
+.modal-body, .modal-fade, .modal-content{
+background:none;
+color:white;
+border:solid white 1px;
+}
+.col-md-10{
+text-align:center;
+}
+
+.blog-post, .col-md-11, div{
+text-align:left;
+}
+.col-md-1 img{
+height:30px;
+width:30px;
+}
+.replies.col-md-1 img{
+height:20px;
+width:40px;
+}
+.card{
+background:none;
+height:100%;
+width:100%;
+}
+.btn{
+width:auto;
+}
+{% endblock  %}

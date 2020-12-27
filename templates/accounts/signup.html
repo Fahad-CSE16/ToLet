@@ -1,0 +1,31 @@
+{% extends 'basic.html' %}
+{% block title %} Signup
+{% endblock  %}
+{% block SignUp %} active
+{% endblock SignUp %}
+{% block body %}
+<body>
+    
+{% load crispy_forms_tags %}
+
+<div class="container-fluid" style="margin-top: 50px;">  
+<div class="col-md-8 offset-md-2">
+                <h2 class="text-center border-bottom">Create Account</h2>  
+                <form method="post" action="{% url 'signup' %}">  
+                    {% csrf_token %}  
+      <fieldset class="form-group mx-auto">
+                {{ form|crispy }}
+               
+            </fieldset>
+                    <button type="submit" vlaue="submit" class="btn btn-primary">Submit</button>  
+                </form>  
+    </div>
+  
+</div>
+</body>
+{% endblock  %}
+{% block css %}
+
+
+    
+{% endblock  %}

@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+
+{% block title%} Contact{% endblock %}
+{% block contactactive %} active{% endblock contactactive %}
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="col-md-6 offset-md-3">
+    
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group mx-auto">
+                <legend class="border-bottom text-center mb-4"><h2>Contact With Admin</h2></legend>
+                {{ form|crispy }}
+               
+            </fieldset>
+            <button class="btn btn-outline-info " type="submit" value="submit">Send To Admin </button>
+            {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} Search Results{% endblock %}
+{% block contactactive %} active{% endblock contactactive %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+<div class="col-md-8 offset-md-2">
+    
+    {% if queryset %}
+    <h1>
+        <legend class="border-bottom mb-4">Your search result </legend>
+    </h1>
+    <br>
+    {% for post in queryset %}
+        <div class="row  border rounded  mb-4 mx-1  ">
+    <div class="col">
+      <img class="d-block m-auto img-thumbnail" src='/media/{{post.photo}}'>
+    </div>
+    <div class="col-md-8 col-lg-8 p-4">
+
+      <div>
+
+        <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+
+        <span class="badge badge-secondary">
+          {{post.timestamp|naturaltime}}</span>
+      </div>
+
+      <div>
+        is giving To-let of a <b> <i> {{post.rent_type}} Flat </i></b> in <i><b>{{post.district}} </b></i>
+
+        <br>
+        <b>Rent:</b>{{post.rent}}
+        <p class="card-text mb-auto"> <a href="/flat/{{post.pk}}/" class="stretched-link">...Details</a></p>
+        <br>
+      </div>
+    </div>
+
+  </div>
+
+    {% endfor %}
+    <br>
+    {% else %}
+    <h1>
+        <legend class="border-bottom mb-4">Not found anything for "<b>{{query}}</b>" in ToletPost</legend>
+    </h1>
+    <br>
+    {% endif %}
+    </div>
+    {% endif %}
+    {% endblock %}
+    {% block css %}
+    legend{
+        color:white;
+    }
+    {% endblock  %}

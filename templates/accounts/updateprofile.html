@@ -1,0 +1,32 @@
+{% extends 'basic.html' %}
+
+{% block title%} Update Your Profile{% endblock %}
+{% block userprofile %} active{% endblock userprofile %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+<div class="col-md-6 offset-md-3">
+
+    <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group mx-auto">
+            <legend class="border-bottom text-center mb-4">
+                <h2>Profile Update</h2>
+            </legend>
+            
+            {{  u_form|crispy }}
+            {{  p_form|crispy }}
+        </fieldset>
+        <button class="btn btn-outline-info " type="submit" value="submit">Update </button>
+    </form>
+
+</div>
+{% endif %}
+{% endblock %}
+{% block css %}
+textarea.form-control,input.emailinput, input.form-control {
+    height: auto;
+    width:100%;
+    color:white;
+    background: none;}
+{% endblock  %}
