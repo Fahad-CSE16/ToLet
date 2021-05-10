@@ -3,12 +3,39 @@
 {% block title%} Home{% endblock %}
 {% block homeactive %} active{% endblock homeactive %}
 {% block body %}
-<h1 class="text-center text-white">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8 offset-md-2">
 
-This is Homepage
-</h1>
+
+<div class="wrapper">
+<marquee behavior="alternate"><h1 class="text-center ">
+Welcome to ToLetBD.com
+</h1></marquee>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<h3 class="mt-5 text-center text-white">Find Your Dream House at Low cost Without Waste of Time</h3>
+{% if not user.is_authenticated %}
+<h5 class="mt-5 text-center text-white">Please Login to fullfill your desire</h5>
+<h2 class="text-center"> <a href=" {% url 'login' %} "> Login Here</a></h2>
+{% endif %}
 {% endblock body %}
 {% block css %}
+
+.wrapper{
+    height: 40px;
+    text-align: left;
+    overflow:hidden;
+    color:red;
+    -webkit-animation: rightThenLeft 1s linear;
+
+}
 
 
 {% endblock %}

@@ -52,10 +52,21 @@ class SearchView(View):
             parking=request.POST.get('parking',None)
             gas=request.POST.get('gas',None)
             keyword=request.POST.get('keyword',None)
+            print(queryset)
             if keyword:
                 query= (Q(details__icontains=keyword)) | (Q(address__icontains=keyword)) 
                 queryset=queryset.filter(query)
-            queryset=queryset.filter(gas=gas).filter(parking=parking).filter(lift=lift).filter(district=district)
+            print(queryset)
+            if gas==1:
+                queryset=queryset.filter(gas=gas)
+            if parking==1:
+                queryset=queryset.filter(parking=parking)
+            print(queryset)
+            
+            if lift==1:
+                queryset=queryset.filter(lift=lift)
+            if district:
+                queryset=queryset.filter(district=district)
 
             queryset=queryset.filter(size__gte=size_from).filter(size__lte=size_to).filter(rent__gte=price_from).filter(rent__lte=price_to)
 

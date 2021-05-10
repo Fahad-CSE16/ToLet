@@ -357,3 +357,7 @@ h6 {
   float: left;
   text-align: center;
 }
+
+#inputGroupSelect03,#inputGroupSelect01{
+  background: none;
+}

@@ -7,6 +7,54 @@
 {% block body %}
 {% load crispy_forms_tags %}
 {% load static %}
+
+
+<div class="col-md-7 offset-md-3">
+  <h1 style="text-align:center;">Search Services</h1>
+
+  <form action="{% url 'searchServe' %}" method="post">
+    {% csrf_token %}
+
+    
+
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect03" name="type">
+
+        <option value="Long Vehicle">Long Vehicle</option>
+        <option value="Pickup">Pickup</option>
+        <option value="Truck">Truck</option>
+        <option value="Van">Van</option>
+
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect03">Vehicle Type</label>
+      </div>
+    </div>
+    
+    
+    
+    
+    <div class="input-group mb-3">
+      <select class="custom-select" id="inputGroupSelect01" name="district" required>
+        <option></option>
+        {% for i in district %}
+        <option value="{{i.id}}">{{i}}</option>
+        {% endfor %}
+      </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect01">From Location</label>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="number" class="form-control"  placeholder="Servant Required" name="servant" required>
+    </div>
+
+    <button class="btn btn-outline-info " type="submit" value="submit">Filter Services </button>
+
+  </form>
+</div>
+
+
   <h1 style="text-align:center;color:white;">Services</h1>
 <div class="container text-left">
   {% for post in services %}
@@ -90,6 +138,9 @@ display: block;
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
 color: #f1f1f1;
+}
+body > div.col-md-7.offset-md-3 > form > div:nth-child(4) > input{
+  background:none;
 }
 
 {% endblock %}

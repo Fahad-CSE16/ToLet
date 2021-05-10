@@ -10,4 +10,6 @@ urlpatterns = [
     path('addphoto/<int:id>/',addphoto, name='addphoto'),
     path('deletephoto/<int:id>/',deletephoto, name='deletephoto'),
     path('update/<int:pk>/',FlatUpdate.as_view(), name='flatupdate'),
+    path('',FlatList.as_view(), name='flatlist'),
+
 ] 

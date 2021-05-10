@@ -10,10 +10,10 @@ class UserProfile(models.Model):
     )
     CATEGORY=(
         ('Owner', 'Owner'),
-        ('Tenant', 'Tenant'),
+        ('Tenent', 'Tenent'),
         ('Servant', 'Servant'),
     )
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='userprofile')
     gender = models.CharField(max_length=50, choices=GENRE_CHOICES)
     address = models.CharField(max_length=150)
     phone=models.CharField(max_length=13)

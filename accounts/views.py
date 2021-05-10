@@ -36,7 +36,14 @@ def loginview(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"You are now logged in as {username}")
-                return redirect('home')
+                try:
+                    instance = UserProfile.objects.get(user=request.user)
+                except UserProfile.DoesNotExist:
+                    instance = None
+                if instance:
+                    return redirect('flatlist')
+                else :
+                    return redirect('updateprofile')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -77,7 +84,7 @@ def contactview(request):
     return render(request, 'accounts/contact_us.html',context )
 from django.views.generic import TemplateView
 class HomeView(TemplateView):
-    template_name='home.html'
+    template_name='accounts/home.html'
 from .models import UserProfile
 def userprofile(request):
     userp = UserProfile.objects.filter(user=request.user)

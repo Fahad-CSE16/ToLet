@@ -22,12 +22,13 @@ class Flat(models.Model):
     gas=models.BooleanField(default=False)    
     parking=models.BooleanField(default=False)  
     is_available=models.BooleanField(default=True)  
-    size=models.FloatField()  
+    size=models.FloatField() 
     rent_type = models.CharField(max_length=50, choices=RENTTYPE)
     rent=models.IntegerField()
     details=models.TextField(blank=False, max_length=500)
     timestamp=models.DateTimeField(default=now)
     photo = models.ImageField(upload_to="Buildings/images")
+    side=models.CharField(max_length=100,default='')
     def save( self, *args, **kwargs):
         super(Flat, self).save(*args, **kwargs)
         img = Image.open(self.photo.path)
@@ -51,3 +52,11 @@ class FlatImages(models.Model):
             img.thumbnail(output_size)
             img.save(self.photo.path)
 
+# class FlatDetails(models.Model):
+#     flat=models.ForeignKey(Flat, on_delete=models.CASCADE,related_name='flatdetail')
+#     room_details=models.CharField(max_length=1000)
+#     price=models.FloatField()
+#     floor_num=models.IntegerField()
+#     side=models.CharField(max_length=100)
+#     size=models.FloatField()
+#     booked=models.BooleanField()

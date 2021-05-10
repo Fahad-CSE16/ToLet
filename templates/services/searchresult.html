@@ -1,0 +1,52 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title%} Search Results{% endblock %}
+{% block contactactive %} active{% endblock contactactive %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+<div class="col-md-8 offset-md-2">
+    
+    {% if queryset %}
+    <h1>
+        <legend class="border-bottom mb-4">Your search result </legend>
+    </h1>
+    <br>
+    {% for post in queryset %}
+        <div class="row  border rounded  mb-4 mx-1  ">
+    
+    <div class="col-md-9">
+
+        <h4>{{post.user.get_full_name}}</h4>
+      
+
+      
+        is Serving Vehicle Services <b> <i> {{post.locaion.name}}  </i></b> to <i><b>AnyWhere in Bangladesh</b></i>
+
+        <br>
+        <b>Provide Maximum Servant:</b>{{post.labour}}
+        <p><b>Conatact:</b> <i>{{post.phone}}</i></p>
+        <br>
+    </div>
+      </div>
+      </div><div>
+    </div>
+
+  </div>
+
+    {% endfor %}
+    <br>
+    {% else %}
+    <h1>
+        <legend class="border-bottom mb-4">Not found anything for "<b>{{query}}</b>" in Services</legend>
+    </h1>
+    <br>
+    {% endif %}
+    </div>
+    {% endif %}
+    {% endblock %}
+    {% block css %}
+    legend{
+        color:white;
+    }
+    {% endblock  %}

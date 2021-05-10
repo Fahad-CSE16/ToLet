@@ -5,7 +5,7 @@
 {% block body %}
 
 {% load crispy_forms_tags %}
-<button class="btn btn-primary" style="width:auto;"><a href="/tolet/viewtolet/">Go Back <--</a></button>
+<button class="btn btn-primary" style="width:auto;"><a href="{% url 'flatlist' %}">Go Back <--</a></button>
 <img src='/media/{{post.photo}}' class="mb-5 d-block m-auto img-thumbnail" alt="..." width="auto" height="300px">
 
 {% for i in post.images.all %}
