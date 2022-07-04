@@ -1,135 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Echologyx | {% block title %}{{title}}{% endblock title %}</title>
 
-  <title>{% block title%} {% endblock %}</title>
-  {% load static %}
-  <link href="{% static 'css/stylelet.css'  %}" rel='stylesheet'>
+    <link rel="shortcut icon" type="image/x-icon" href=" {% static 'img/favicon.ico' %} ">
 
-  <style>
-    {% block css %}
-      {% endblock css %}
-  </style>
+    <link rel="stylesheet" href=" {% static 'style.css' %}"> 
+
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script> {% endcomment %}
+  	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Stick No Bills|Sofia|Roboto|Sevillana|Tangerine|Lobster&display=swap:wght@700">
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+    body{
+      overflow-x:hidden;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body::-webkit-scrollbar {
+      display: none;
+    }
+{% block css %}{% endblock css %}
+</style>
 
-<body >
-  <nav class="navbar navbar-expand-lg navbar-light " style="background:none; color:white; text-color:white;">
-    <a class="navbar-brand" style=" color:white; text-color:white;" href="">ToLetBD</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon" style=" color:white; text-color:white;">Menu</span>
-    </button>
+<body style="background:#282121; color:white; background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url(/media/bg.jpg);background-size:cover;background-attachment:fixed;background-position:top">
+    {% include 'components/header.html' %}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav m-auto">
-        <li class="nav-item {% block blogactive %}
-      {% endblock blogactive %} ">
-
-
-      {% if user.is_authenticated %}
-      <a class="nav-link" href=" {% url 'flatlist' %} ">Home</a>
-      {% else %}
-
-          <a class="nav-link" href="/">Home</a>
-      {% endif %}
-        </li>
-
-       {% if user.is_authenticated %}
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            To-Let
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:none; color:white;">
-        {% if "Owner" in user.userprofile.profession %}
-            <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'flatcreate' %}">Create Rent</a>
-        {% endif %}
-        {% if "Servant" in user.userprofile.profession %}
-            <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'servicecreate' %}">Create Serve</a>
-        {% endif %}
-            <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'servicelist' %}">Services</a>
-
+    {% comment %} Div for Showing Messages {% endcomment %}
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 pt-4">
+        <div class=" pt-5">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-red"
+               role="alert">
+              <strong>{{ message }}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><i class="fa fa-trash"></i></span>
+              </button>
           </div>
-
-        </li>
-       {% endif %}
-        <li class="nav-item  {% block contactactive %}
-      {% endblock contactactive %}">
-          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-        </li>
-
-        <li class="nav-item  {% block aboutactive %}
-      {% endblock aboutactive %}">
-          <a class="nav-link" href="{% url 'about' %}">About</a>
-        </li>
-        {% if user.is_authenticated %}
-        <ul class="navbar-nav">
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              {{request.user}}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:none; color:white;">
-              <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'userprofile' %}">Profile</a>
-              <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'logout' %}">Logout</a>
-
-            </div>
-          </li>
-        </ul>
-        {% else %}
-
-        <li class="nav-item  {% block signup %}
-      {% endblock signup %}">
-          <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-        </li>
-        <li class="nav-item  {% block login %}
-      {% endblock login %}">
-          <a class="nav-link" href="/acc/login/">Login</a>
-        </li>
-
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="">{% now "h:i A" as current_time %}
-            {{ current_time|center:"150"  }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">{% now "D jS F Y" %}</a>
-        </li>
-      </ul>
+      {% endfor %}
+        </div>
+      </div>
     </div>
-
-  </nav>
-
-
-
-
-  {% for message in messages  %}
-
-  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-    <strong></strong> {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {% endfor %}
+  
   <br>
-  {% block body %}
-  {% endblock  %}
-  {% block js %} {% endblock %}
+    
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+     {% block body %}{% endblock body %}
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.1.0/autoNumeric.min.js" integrity="sha512-U0/lvRgEOjWpS5e0JqXK6psnAToLecl7pR+c7EEnndsVkWq3qGdqIGQGN2qxSjrRnCyBJhoaktKXTVceVG2fTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -137,6 +68,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-</body>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+{% block js %}{% endblock js %}
 </html>

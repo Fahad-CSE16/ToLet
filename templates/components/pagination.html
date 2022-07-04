@@ -1,0 +1,19 @@
+<div class="text-center text-white pb-5">
+    {% if items.has_previous %}
+        <a href="{{request.path}}?page=1" class="btn btn-outline-info">First</a>
+        <a href="{{request.path}}?page={{items.previous_page_number}}" class="btn btn-outline-info"><<--Previous</a>
+    {% endif %}
+    
+    {% for n in items.paginator.page_range %}
+        {% if items.number == n %}
+        <a href="{{request.path}}?page={{n}}" class="btn btn-outline-info active">{{n}}</a>
+        {% elif n > items.number|add:'-5' and n < items.number|add:'5' %}
+        <a href="{{request.path}}?page={{n}}" class="btn btn-outline-info">{{n}}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if items.has_next %}
+        <a href="{{request.path}}?page={{items.next_page_number}}" class="btn btn-outline-info">Next-->></a>
+        <a href="{{request.path}}?page={{items.paginator.num_pages}}" class="btn btn-outline-info">Last</a>
+    {% endif %}
+</div>

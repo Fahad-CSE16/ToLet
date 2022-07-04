@@ -1,0 +1,51 @@
+ 
+{% load static %}
+ <div class="navbar menu navbar-dark bg-none mb-5 navbar-expand-sm fixed-top" style="background:none;background:#161313; box-shadow: 0 4px 50px 0 rgb(249 235 235 / 20%), 0 6px 50px 0 rgb(227 215 215 / 19%); color:white;">
+    <div class="container">
+      <h1 class="text-center text-white" style="font-family:Tangerine;"> <a class="text-center text-white" href="/"> <b>EchoLogyX</b> </a></h1>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto font-weight-bold">
+          <li class="nav-item"> <a href="/" class="nav-link active">Home</a> </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              To-Let
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:none; color:white;">
+          {% if "Owner" in user.userprofile.profession %}
+              <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'flatcreate' %}">Create Rent</a>
+          {% endif %}
+          {% if "Servant" in user.userprofile.profession %}
+              <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'servicecreate' %}">Create Serve</a>
+          {% endif %}
+              <a class="dropdown-item" style=" color:#26f1fb;" href="{% url 'servicelist' %}">Services</a>
+  
+            </div>
+  
+          </li>
+          {% endif %}
+          <li class="nav-item"> <a href="{% url 'contact' %}" class="nav-link">Contact</a> </li>
+          <li class="nav-item"> <a href="{% url 'about' %}" class="nav-link">About</a> </li>
+
+
+
+          {% if user.is_authenticated %}
+            <li class="nav-item"> <a href="{% url 'logout' %}" class="nav-link">Logout</a> </li>
+            <li class="nav-item"> <a href="" class="nav-link">{{user.username}}</a> </li>
+          {% else %}
+            <li class="nav-item"> <a href="{% url 'signup' %}" class="nav-link">Registration</a> </li>
+            <li class="nav-item"> <a href="{% url 'login' %}" class="nav-link">Login</a> </li>
+            <li class="nav-item"> <a href="" class="nav-link">{{user.email}}</a> </li>
+
+          {% endif %}
+          
+        </ul>
+      </div>
+    </div>
+  </div>

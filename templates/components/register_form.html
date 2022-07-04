@@ -1,0 +1,44 @@
+           {% load crispy_forms_tags %}
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{form.email| as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.first_name | as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.last_name | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.phone | as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.profile_picture | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.password | as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{form.password_2 | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
